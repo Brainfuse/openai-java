@@ -1,12 +1,21 @@
 package com.theokanning.openai.service;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.theokanning.openai.ListSearchParameters;
 import com.theokanning.openai.OpenAiResponse;
 import com.theokanning.openai.assistants.Assistant;
 import com.theokanning.openai.assistants.AssistantFunction;
@@ -21,25 +30,14 @@ import com.theokanning.openai.messages.MessageRequest;
 import com.theokanning.openai.runs.RequiredAction;
 import com.theokanning.openai.runs.Run;
 import com.theokanning.openai.runs.RunCreateRequest;
-import com.theokanning.openai.runs.RunStep;
 import com.theokanning.openai.runs.SubmitToolOutputRequestItem;
-import com.theokanning.openai.runs.SubmitToolOutputs;
 import com.theokanning.openai.runs.SubmitToolOutputsRequest;
 import com.theokanning.openai.runs.ToolCall;
 import com.theokanning.openai.threads.Thread;
 import com.theokanning.openai.threads.ThreadRequest;
 import com.theokanning.openai.utils.TikTokensUtil;
-import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 class AssistantFunctionTest {
     String token = System.getenv("OPENAI_TOKEN");
     OpenAiService service = new OpenAiService(token, Duration.ofMinutes(1));

@@ -1,19 +1,35 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.DeleteResult;
-import com.theokanning.openai.ListSearchParameters;
-import com.theokanning.openai.OpenAiResponse;
-import com.theokanning.openai.assistants.*;
-import com.theokanning.openai.file.File;
-import com.theokanning.openai.utils.TikTokensUtil;
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+import com.theokanning.openai.DeleteResult;
+import com.theokanning.openai.ListSearchParameters;
+import com.theokanning.openai.OpenAiResponse;
+import com.theokanning.openai.assistants.Assistant;
+import com.theokanning.openai.assistants.AssistantFile;
+import com.theokanning.openai.assistants.AssistantFileRequest;
+import com.theokanning.openai.assistants.AssistantRequest;
+import com.theokanning.openai.assistants.AssistantToolsEnum;
+import com.theokanning.openai.assistants.ModifyAssistantRequest;
+import com.theokanning.openai.assistants.Tool;
+import com.theokanning.openai.file.File;
+import com.theokanning.openai.utils.TikTokensUtil;
 
 
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AssistantTest {
 

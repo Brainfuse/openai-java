@@ -1,18 +1,21 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.image.CreateImageEditRequest;
-import com.theokanning.openai.image.CreateImageRequest;
-import com.theokanning.openai.image.CreateImageVariationRequest;
-import com.theokanning.openai.image.Image;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+import com.theokanning.openai.image.CreateImageEditRequest;
+import com.theokanning.openai.image.CreateImageRequest;
+import com.theokanning.openai.image.CreateImageVariationRequest;
+import com.theokanning.openai.image.Image;
 
 
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 public class ImageTest {
 
     static String filePath = "src/test/resources/penguin.png";

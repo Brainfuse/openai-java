@@ -1,18 +1,23 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.DeleteResult;
-import com.theokanning.openai.messages.MessageRequest;
-import com.theokanning.openai.threads.Thread;
-import com.theokanning.openai.threads.ThreadRequest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 
-import java.util.*;
+import com.theokanning.openai.DeleteResult;
+import com.theokanning.openai.messages.MessageRequest;
+import com.theokanning.openai.threads.Thread;
+import com.theokanning.openai.threads.ThreadRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ThreadTest {
 

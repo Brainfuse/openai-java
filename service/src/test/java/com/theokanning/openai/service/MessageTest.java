@@ -1,26 +1,28 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.ListSearchParameters;
-import com.theokanning.openai.file.File;
-import com.theokanning.openai.messages.Message;
-import com.theokanning.openai.messages.MessageFile;
-import com.theokanning.openai.messages.MessageRequest;
-import com.theokanning.openai.messages.ModifyMessageRequest;
-import com.theokanning.openai.threads.Thread;
-import com.theokanning.openai.threads.ThreadRequest;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+import com.theokanning.openai.ListSearchParameters;
+import com.theokanning.openai.file.File;
+import com.theokanning.openai.messages.Message;
+import com.theokanning.openai.messages.MessageFile;
+import com.theokanning.openai.messages.MessageRequest;
+import com.theokanning.openai.messages.ModifyMessageRequest;
+import com.theokanning.openai.threads.ThreadRequest;
 
 
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 public class MessageTest {
 
     static OpenAiService service;

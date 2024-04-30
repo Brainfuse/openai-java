@@ -1,14 +1,17 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.model.Model;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.List;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
+import com.theokanning.openai.model.Model;
+
+
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 public class ModelTest {
 
     String token = System.getenv("OPENAI_TOKEN");

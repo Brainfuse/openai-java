@@ -1,12 +1,15 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.moderation.Moderation;
-import com.theokanning.openai.moderation.ModerationRequest;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 
+import com.theokanning.openai.moderation.Moderation;
+import com.theokanning.openai.moderation.ModerationRequest;
+
+
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 public class ModerationTest {
 
     String token = System.getenv("OPENAI_TOKEN");

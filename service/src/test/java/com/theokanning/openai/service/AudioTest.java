@@ -1,21 +1,26 @@
 package com.theokanning.openai.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.time.Duration;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+
 import com.theokanning.openai.audio.CreateSpeechRequest;
 import com.theokanning.openai.audio.CreateTranscriptionRequest;
 import com.theokanning.openai.audio.CreateTranslationRequest;
 import com.theokanning.openai.audio.TranscriptionResult;
 import com.theokanning.openai.audio.TranslationResult;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.time.Duration;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-
+@EnabledIfEnvironmentVariable(named = "OPENAI_TOKEN", matches = ".*\\S.*")
 public class AudioTest {
 
     static String englishAudioFilePath = "src/test/resources/hello-world.mp3";
