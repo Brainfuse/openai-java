@@ -1,15 +1,20 @@
 package com.theokanning.openai.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import com.knuddels.jtokkit.Encodings;
 import com.knuddels.jtokkit.api.Encoding;
 import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.ModelType;
 import com.theokanning.openai.completion.chat.ChatMessage;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.*;
 
 /**
  * Token calculation tool class
@@ -29,6 +34,7 @@ public class TikTokensUtil {
             modelMap.put(modelType.getName(), registry.getEncodingForModel(modelType));
         }
         modelMap.put(ModelEnum.GPT_3_5_TURBO_0301.getName(), registry.getEncodingForModel(ModelType.GPT_3_5_TURBO));
+        modelMap.put(ModelEnum.GPT_4_TURBO.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_32K.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_32K_0314.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_0314.getName(), registry.getEncodingForModel(ModelType.GPT_4));
@@ -223,8 +229,9 @@ public class TikTokensUtil {
             return ModelType.GPT_3_5_TURBO;
         }
         if (ModelEnum.GPT_4.getName().equals(name)
-                || ModelEnum.GPT_4_32K.getName().equals(name)
-                || ModelEnum.GPT_4_32K_0314.getName().equals(name)
+              || ModelEnum.GPT_4_32K.getName().equals(name)
+              || ModelEnum.GPT_4_32K.getName().equals(name)
+                || ModelEnum.GPT_4_TURBO.getName().equals(name)
                 || ModelEnum.GPT_4_0314.getName().equals(name)) {
             return ModelType.GPT_4;
         }
@@ -252,6 +259,10 @@ public class TikTokensUtil {
          * GPT4.0
          */
         GPT_4("gpt-4"),
+        /**
+         * GPT4.0
+         */
+        GPT_4_TURBO("gpt-4-turbo"),
         /**
          * Temporary model, not recommended for use.
          */

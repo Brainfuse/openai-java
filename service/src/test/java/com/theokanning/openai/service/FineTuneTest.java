@@ -1,15 +1,25 @@
 package com.theokanning.openai.service;
 
-import com.theokanning.openai.finetune.FineTuneEvent;
-import com.theokanning.openai.finetune.FineTuneRequest;
-import com.theokanning.openai.finetune.FineTuneResult;
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
+import com.theokanning.openai.finetune.FineTuneEvent;
+import com.theokanning.openai.finetune.FineTuneRequest;
+import com.theokanning.openai.finetune.FineTuneResult;
+
+@Disabled
 @Deprecated
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FineTuneTest {

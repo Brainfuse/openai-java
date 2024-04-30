@@ -41,3 +41,11 @@ build
 
 # Ignore the macOS folder attribute file
 **/.DS_Store
+/bin/
+/.apt_generated/
+/.project
+target/
+.settings/
+.factorypath
+.classpath
+.project

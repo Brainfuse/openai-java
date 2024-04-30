@@ -1,7 +1,10 @@
 package com.theokanning.openai.completion.chat;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,12 +43,21 @@ public class ChatMessage<T> {
 
 	public ChatMessage(String role, T content) {
 		this.role = role;
+		validateContentType(content);
 		this.content = content;
+		
 	}
+
 
 	public ChatMessage(String role, T content, String name) {
 		this.role = role;
+		validateContentType(content);
 		this.content = content;
 		this.name = name;
+	}
+
+	private void validateContentType(T content) {
+		if (!(content instanceof String) && !(content instanceof List))
+			throw new IllegalArgumentException("Invalid content type must be String or List");
 	}
 }
