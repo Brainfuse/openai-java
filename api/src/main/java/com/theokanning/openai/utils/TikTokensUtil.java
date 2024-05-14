@@ -35,6 +35,7 @@ public class TikTokensUtil {
         }
         modelMap.put(ModelEnum.GPT_3_5_TURBO_0301.getName(), registry.getEncodingForModel(ModelType.GPT_3_5_TURBO));
         modelMap.put(ModelEnum.GPT_4_TURBO.getName(), registry.getEncodingForModel(ModelType.GPT_4));
+        modelMap.put(ModelEnum.GPT_4_O.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_32K.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_32K_0314.getName(), registry.getEncodingForModel(ModelType.GPT_4));
         modelMap.put(ModelEnum.GPT_4_0314.getName(), registry.getEncodingForModel(ModelType.GPT_4));
@@ -133,7 +134,11 @@ public class TikTokensUtil {
      * @return Encoding
      */
     public static Encoding getEncoding(String modelName) {
-        return modelMap.get(modelName);
+   	 Encoding encoding = modelMap.get(modelName);
+   	 if (encoding == null) {
+   		 throw new IllegalArgumentException("Unable to find encoding for modelName: " + modelName + "\navailable encodings: " + modelMap);
+   	 }
+   	 return encoding;
     }
 
     /**
@@ -230,7 +235,7 @@ public class TikTokensUtil {
         }
         if (ModelEnum.GPT_4.getName().equals(name)
               || ModelEnum.GPT_4_32K.getName().equals(name)
-              || ModelEnum.GPT_4_32K.getName().equals(name)
+              || ModelEnum.GPT_4_O.getName().equals(name)
                 || ModelEnum.GPT_4_TURBO.getName().equals(name)
                 || ModelEnum.GPT_4_0314.getName().equals(name)) {
             return ModelType.GPT_4;
@@ -263,6 +268,10 @@ public class TikTokensUtil {
          * GPT4.0
          */
         GPT_4_TURBO("gpt-4-turbo"),
+        /**
+         * GPT4o
+         */
+        GPT_4_O("gpt-4o"),
         /**
          * Temporary model, not recommended for use.
          */
