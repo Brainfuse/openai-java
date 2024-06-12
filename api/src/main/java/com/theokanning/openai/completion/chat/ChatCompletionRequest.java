@@ -1,13 +1,14 @@
 package com.theokanning.openai.completion.chat;
 
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
@@ -100,6 +101,12 @@ public class ChatCompletionRequest {
      */
     List<?> functions;
 
+    /**
+     * Whether to respond with plaintext or json
+     */
+    @JsonProperty("response_format")
+    ResponseFormat responseFormat;
+    
     /**
      * Controls how the model responds to function calls, as specified in the <a href="https://platform.openai.com/docs/api-reference/chat/create#chat/create-function_call">OpenAI documentation</a>.
      */
