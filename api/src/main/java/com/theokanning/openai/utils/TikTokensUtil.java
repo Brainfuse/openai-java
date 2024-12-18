@@ -12,6 +12,7 @@ import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.ModelType;
 import com.theokanning.openai.completion.chat.ChatMessage;
+import com.theokanning.openai.completion.chat.ChatMessageContent;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -195,11 +196,19 @@ public class TikTokensUtil {
             tokensPerName = 1;
         }
         int sum = 0;
-        for (ChatMessage msg : messages) {
+        for (@SuppressWarnings("rawtypes") ChatMessage msg : messages) {
             sum += tokensPerMessage;
             if(msg.getContent() instanceof String){
-                sum += tokens(encoding, msg.getContent().toString());
-            }
+               sum += tokens(encoding, msg.getContent().toString());
+           } else if(msg.getContent() instanceof List){
+	        		@SuppressWarnings("unchecked")
+					List<ChatMessageContent> contentList = (List<ChatMessageContent>)msg.getContent();
+	        		for (ChatMessageContent content : contentList) {
+	        			String value = "image_url".equals(content.getType()) ? 
+	        					content.getImageUrl().getUrl() : content.getText();
+	               sum += tokens(encoding, value);
+					}
+           }
             sum += tokens(encoding, msg.getRole());
             sum += tokens(encoding, msg.getName());
             if (isNotBlank(msg.getName())) {
